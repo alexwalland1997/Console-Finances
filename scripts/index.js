@@ -86,4 +86,39 @@ var finances = [
     ['Jan-2017', 138230],
     ['Feb-2017', 671099],
   ];
-  
+
+  //set total to first profit/loss in array
+  var total = finances[0][1];
+  //set biggest loss/profit to first one in array
+  var gLoss = 0;
+  var gProfit= 0;
+  var aTotal = 0;
+
+  for (var i=1; i < finances.length; i++)
+  {
+    //add new loss/profit to total
+    total += finances[0][1];
+    
+    //add change between current month and previous to average total
+    aTotal += (finances[i][1] - finances[i-1][1]);
+
+    //check if loss/profit is greater than current value
+    if (finances[i][1] > finances[gProfit][1]) {
+        gProfit = i;
+    } else if (finances[i][1] < finances[gLoss][1]) {
+        gLoss = i;
+    }
+  }
+
+//calculate average of change and fix to 2 decimal places
+aTotal = aTotal/(finances.length-1);
+aTotal = aTotal.toFixed(2);
+
+//print out the analysis of total number of months total profit average change and greatest increase/decrease
+  console.log("Financial Analysis");
+  console.log("------------------------");
+  console.log("Total Months: " + finances.length);
+  console.log("Total' $" + total);
+  console.log("Average change: " + aTotal);
+  console.log("Greatest increase in profits/losses: " + finances[gProfit][0] + " " + "($" + finances[gProfit][1] + ")");
+  console.log("Greatest decrease in profits/losses: " + finances[gLoss][0] + " " + "($" + finances[gLoss][1] + ")");
