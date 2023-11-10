@@ -89,9 +89,11 @@ var finances = [
 
   //set total to first profit/loss in array
   var total = finances[0][1];
-  //set biggest loss/profit to first one in array
+  //set biggest loss/profit to first one in array and set average change to 0
   var gLoss = 0;
+  var lAverage = 0;
   var gProfit= 0;
+  var pAverage = 0;
   var aTotal = 0;
 
   for (var i=1; i < finances.length; i++)
@@ -102,11 +104,13 @@ var finances = [
     //add change between current month and previous to average total
     aTotal += (finances[i][1] - finances[i-1][1]);
 
-    //check if loss/profit is greater than current value
-    if (finances[i][1] > finances[gProfit][1]) {
+    //check if loss/profit from last month is greater than or less than current value if so update current highest/lowest
+    if ((finances[i][1] - finances[i-1][1])> pAverage) {
         gProfit = i;
-    } else if (finances[i][1] < finances[gLoss][1]) {
+        pAverage = (finances[i][1] - finances[i-1][1]);
+    } else if ((finances[i][1] - finances[i-1][1])< lAverage) {
         gLoss = i;
+        lAverage = (finances[i][1] - finances[i-1][1]);
     }
   }
 
@@ -120,5 +124,5 @@ aTotal = aTotal.toFixed(2);
   console.log("Total Months: " + finances.length);
   console.log("Total' $" + total);
   console.log("Average change: " + aTotal);
-  console.log("Greatest increase in profits/losses: " + finances[gProfit][0] + " " + "($" + finances[gProfit][1] + ")");
-  console.log("Greatest decrease in profits/losses: " + finances[gLoss][0] + " " + "($" + finances[gLoss][1] + ")");
+  console.log("Greatest increase in profits/losses: " + finances[gProfit][0] + " " + "($" + pAverage + ")");
+  console.log("Greatest decrease in profits/losses: " + finances[gLoss][0] + " " + "($" + lAverage + ")");
