@@ -15,3 +15,6 @@ To see the results you just need to select inspect and view the console
 ![alt text](/images/example.png)
 
 ## Credits
+
+Rounding to 2 decimal places - https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
+How to choose a certain variable from an array ie array[index][variableposition]  - TA Dre Dawkins
